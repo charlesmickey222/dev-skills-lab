@@ -4,7 +4,10 @@ import {Skill} from "../models/skill.js";
 function index(req,res){
 Skill.find({})
 .then(skills =>{
-  res.render('skills/index')
+  res.render('skills/index',{
+    title:'skills',
+    skills,
+  })
 })
 .catch(err =>{
   console.log(err)
@@ -33,6 +36,7 @@ function show(req, res){
   Skill.findById(req.params.id)
   .then(skill=>{
     res.render('skills/show',{
+      title:'A Skill',
       skill:skill,
     })
   })
@@ -45,7 +49,8 @@ function edit(req,res){
   Skill.findById(req.params.id)
   .then(skill=>{
     res.render(`skills/${req.params.id}/edit`,{
-
+      title:'edit skill',
+      skill,
     })
   })
   .catch(error=>{
